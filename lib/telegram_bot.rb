@@ -24,7 +24,7 @@ class TelegramBot
       res = Net::HTTP.post_form(uri, 'email': email, 'chat_id': message.chat.id)
       status = JSON.parse(res.body, symbolize_names: true)[:status]
     rescue
-      message_text = 'Poxa, estamos com algum problema interno :( tente outra vez daqui a pouco.'
+      message_text = 'Poxa, estamos com algum problema interno. Tente outra vez daqui a pouco :('
       return bot.api.send_message(chat_id: message.chat.id, text: message_text)
     end
 
