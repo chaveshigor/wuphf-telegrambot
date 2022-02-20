@@ -19,8 +19,14 @@ class TelegramBot
   def save_chat_id(message, bot)
     email = message.text
 
-    uri = URI("#{ENV['APP_BASE_URL']}/telegram_auths/create")
-    res = Net::HTTP.post_form(uri, 'email': email, 'chat_id': message.chat.id)
+    begin      
+      uri = URI("#{ENV['APP_BASE_URL']}/telegram_auths/create")
+      res = Net::HTTP.post_form(uri, 'email': email, 'chat_id': message.chat.id) 
+    rescue
+      message_text = 'Poxa, estamos com algum problema interno :( tente outra vez daqui a pouco.'
+      return bot.api.send_message(chat_id: message.chat.id, text: message_text)
+    end
+    rescue 
     status = JSON.parse(res.body, symbolize_names: true)[:status]
 
     message_text = 'Poxa, algo deu errado. Tenta outra vez daqui a pouquinho :('
