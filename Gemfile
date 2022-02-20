@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-gem 'dotenv'
 gem 'telegram-bot-ruby'
+group :development, :test do
+  gem 'dotenv'
+end
