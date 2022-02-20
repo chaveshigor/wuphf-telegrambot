@@ -20,7 +20,7 @@ class TelegramBot
     email = message.text
 
     begin
-      uri = URI("#{ENV['APP_BASE_URL']}/telegram_auths/create")
+      uri = URI("#{ENV['APP_BASE_URL']}/auth_contacts/telegram")
       res = Net::HTTP.post_form(uri, 'email': email, 'chat_id': message.chat.id)
       status = JSON.parse(res.body, symbolize_names: true)[:status]
     rescue
