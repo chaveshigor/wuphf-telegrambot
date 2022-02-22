@@ -36,7 +36,7 @@ class TelegramBot
   def run
     Telegram::Bot::Client.run(@bot_token) do |bot|
       bot.listen do |message|
-        start_talk(message, bot) if message.text.upcase == 'START'
+        start_talk(message, bot) if message.text.upcase == '/START'
         save_chat_id(message, bot) if message.text.include? '@'
       end
     end
